@@ -19,10 +19,25 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'username',
         'password',
+        'role'
     ];
+    
+    public function isAdmin(): bool
+{
+    return $this->role === 'admin';
+}
 
+    public function isOperator(): bool
+{
+    return $this->role === 'operator';
+}
+
+    public function isTeacher(): bool
+{
+    return $this->role === 'teacher';
+}
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,7 +56,6 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
